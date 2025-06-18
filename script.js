@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load questions for the selected chapter
     function loadQuestion() {
+	
+	
+
+
         const chapter = quizData[currentChapterIndex];
         selectedQuestions = chapter.questions;
         userAnswers = [];
@@ -71,6 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
             inputDiv.appendChild(remainSpan);
 
             questionItem.appendChild(inputDiv);
+		const toggleHintBtn = document.createElement('button');
+toggleHintBtn.type = 'button';
+toggleHintBtn.className = 'btn btn-sm btn-secondary mb-2';
+toggleHintBtn.style.marginBottom = '4px';
+toggleHintBtn.textContent = 'Ẩn gợi ý';
+questionItem.appendChild(toggleHintBtn);
+
+		
 
             // Hiện danh sách đáp án có thể nhập (gợi ý) - mỗi dòng một đáp án
             const hintDiv = document.createElement('div');
@@ -83,7 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
             questionItem.appendChild(hintDiv);
 
             questionContainer.appendChild(questionItem);
-
+		
+		toggleHintBtn.onclick = function() {
+    if (hintDiv.style.display === 'none') {
+        hintDiv.style.display = '';
+        toggleHintBtn.textContent = 'Ẩn gợi ý';
+    } else {
+        hintDiv.style.display = 'none';
+        toggleHintBtn.textContent = 'Hiện gợi ý';
+    }
+};
             // Focus input khi load
             setTimeout(() => answerInput.focus(), 300);
 
